@@ -1,0 +1,101 @@
+<html>
+<head> <title> NaveAlert </title> </head>
+
+
+<center>
+<canvas id="myCanvas" width="600" height="800" style="border:1px margin-bottom: 25% solid #000000;"></canvas>
+</center>
+<body>
+
+<script src = './Js/Menu.js'></script>
+<script src = './Js/MenuHorarios.js'> </script>
+<script src = './Js/Horarios.js'> </script>
+<script src = './Js/Login.js'> </script>
+<script src = './Js/Entrada.js'> </script>
+<script src = './Js/Criar.js'> </script>
+<script src = './Js/Instrucoes.js'> </script>
+<script src = './Js/Animacao.js'> </script>
+<script src = './Js/creditos.js'> </script>
+<script src = './Js/Boletim.js'> </script>
+<script src = './Js/Monitoriasao.js'> </script>
+<script src = './Js/Pronto.js'> </script>
+
+
+
+
+
+<script>  
+
+var canvas = document.getElementById("myCanvas");
+var context = canvas.getContext("2d");
+
+	var _mouseMove = function(e)
+	{
+		MouseX = e.offsetX;
+		MouseY = e.offsetY;
+		//console.log(e.offsetX + " | " + e.offsetY)
+	}
+   
+   	var MouseX;
+	var MouseY;
+	var MousePress;
+	
+	var _mouseDown = function(e)
+	{
+	    MousePress = true
+	}
+	
+	var scene = "animacao";
+	
+	var animacao = new Animacao();
+	var menu = new Menu();
+	var menuhorarios = new Menuhorarios();
+	var horarios = new Horarios();
+	var login = new Login ();
+	var entrada = new Entrada();
+	var criar = new Criar();
+	var instrucoes = new Instrucoes();
+	var creditos = new Creditos();
+	var boletim = new Boletim();
+	var monitoriasao = new Monitoriasao();
+	var pronto = new Pronto();
+	
+	function draw()
+	{		
+		if (scene == "animacao") animacao.draw();
+		else if (scene == "menu") menu.draw();
+		else if (scene == "menuhorarios") menuhorarios.draw();
+		else if (scene == "horarios") horarios.draw();
+		else if (scene == "login") login.draw();
+		else if (scene == "entrada") entrada.draw();
+		else if (scene == "criar") criar.draw ();
+		else if (scene == "instrucoes") instrucoes.draw();
+		else if (scene == "creditos") creditos.draw();
+		else if (scene == "boletim") boletim.draw();
+		else if (scene == "monitoriasao") monitoriasao.draw();
+		else if (scene == "pronto") pronto.draw();
+		
+		if(MousePress)	MousePress = false
+		
+		
+		
+	}
+	
+	function loop ()
+	{
+		draw();
+		setTimeout(loop, 30);
+		
+		console.log(MousePress)
+	
+	}
+	
+document.addEventListener("mousedown",  _mouseDown,  false);
+document.addEventListener("mousemove",  _mouseMove,  false);
+
+loop();
+
+
+</script>
+</body>
+</html>

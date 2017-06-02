@@ -1,0 +1,130 @@
+<html>
+<head>
+<title> Labirinto de Delta </title>
+<style>
+	body
+	{
+		background-color: black;
+	}
+	#myCanvas
+	{
+		position: relative;
+		transform: translateY(15%);
+	}
+</style>
+
+</head>
+<body>
+<center>
+<canvas id="myCanvas" width="864" height="540" style="border: 5px solid #000000;">
+</canvas> </center>
+
+<script src = './Js/menu.js'></script>
+<script src = './Js/creditos.js'></script>
+<script src = './Js/ajuda.js'></script>
+<script src = './Js/inicio.js'></script>
+<script src = './Js/explicacao.js'></script>
+<script src = './Js/faseUm.js'></script>
+<script src = './Js/mudar.js'></script>
+<script src = './Js/faseDois.js'></script>
+<script src = './Js/derrota.js'></script>
+<script src = './Js/vitoria.js'></script>
+
+<script>
+
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+	
+	var _mouseMove = function(e)
+	{
+		MouseX = e.offsetX;
+		MouseY = e.offsetY;
+		//console.log(e.offsetX + " | " + e.offsetY)
+	}
+   
+   	var MouseX;
+	var MouseY;
+	var MousePress;
+	
+	var _mouseDown = function(e)
+	{
+		
+	}
+	var _mouseUp = function(e)
+	{
+		MousePress = true;
+	}
+	
+	var scene = "menu";
+	
+	var menu = new Menu();
+	var inicio = new Inicio ();
+	var creditos = new Creditos();
+	var ajuda = new Ajuda();	
+	var explicacao = new Explicacao();
+	var faseUm = new FaseUm();
+	var mudar = new Mudar ();
+	var faseDois = new FaseDois();
+	var derrota =  new Derrota ();
+	var vitoria =  new Vitoria ();
+
+	var musiquinha = new Audio();
+	musiquinha.src = "Audio/Tempting Secrets.mp3"
+	musiquinha.load();
+	
+	var erradinha = new Audio();
+	erradinha.src = "Audio/resposta errada.wav"
+	erradinha.load();
+	
+	var certinha = new Audio();
+	certinha.src = "Audio/DING.wav"
+	certinha.load();
+	
+	
+	
+	function draw()
+	{			
+		if (scene == "menu") menu.draw();
+		else if (scene == "inicio") inicio.draw();
+		else if (scene == "creditos") creditos.draw();
+		else if (scene == "ajuda") ajuda.draw();
+		else if (scene == "explicacao") explicacao.draw();		
+		else if (scene == "faseUm") faseUm.draw();
+		else if (scene == "mudar") mudar.draw ();
+		else if (scene == "faseDois")faseDois.draw();
+		else if (scene == "derrota") derrota.draw ();
+		else if (scene == "vitoria") vitoria.draw ();
+	}
+	
+	
+	
+
+
+	function loop ()
+	{
+		draw();
+		MousePress = false;
+		setTimeout(loop, 30);		
+		
+	}
+		
+	function shuffle(o)
+	{
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+	}
+
+	
+	
+	
+	
+	
+document.addEventListener("mousedown",  _mouseDown,  false);
+document.addEventListener("mousemove",  _mouseMove,  false);
+document.addEventListener("mouseup",  _mouseUp,  false);
+
+	loop();
+	
+</script>
+</body>
+</html>
